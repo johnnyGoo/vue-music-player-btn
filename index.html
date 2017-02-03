@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>VueMusicPlayerButton</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+</head>
+<style>
+   .on{
+       padding: 10px;
+       background: #003366;
+   }
+   .off{
+       padding: 10px;
+       background: #0086b3;
+   }
+
+</style>
+<body>
+<vue-music-player-button :auto-play="true" @update-state="updateState" src="sound/background.mp3" :loop="false">
+    <div slot="on" >on</div>
+    <div slot="off" >off</div>
+</vue-music-player-button>
+<script src="dist/vue.min.js"></script>
+<script src="dist/smart.min.js"></script>
+<script src="dist/wechat-share.js"></script>
+<script src="dist/vue-music-player-button.js"></script>
+
+<script>
+
+    Smart.Css.createSmartCssStyle('.blur', {filter: 'blur(0px);'});
+    // Smart.Css.smartCss(document.querySelector('.blur'),{filter:'blur(10px);',width:'100%'});
+    new Vue({
+        el: 'body',
+        components: {
+           VueMusicPlayerButton: VueMusicPlayerButton
+        },
+        data: {
+
+        },
+        methods: {
+            updateState:function (playing) {
+                console.log(playing);
+            }
+        }
+    })
+
+
+</script>
+</body>
+</html>
