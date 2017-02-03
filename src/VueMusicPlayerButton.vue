@@ -23,7 +23,6 @@
     var Smart = window.Smart;
     var Sound = Smart.Sound;
     var Event = Smart.Event;
-    var _ = Smart._;
     var WechatShareClass;
 
     // 注册
