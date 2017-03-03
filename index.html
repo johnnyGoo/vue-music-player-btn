@@ -21,10 +21,12 @@
 
 </style>
 <body>
-<vue-music-player-button :auto-play="true" @update-state="updateState" src="sound/background.mp3" :loop="false">
+<vue-music-player-button :auto-play="true" :volume="volume" @update-state="updateState" src="sound/background.mp3" :loop="false">
     <div slot="on" >on</div>
     <div slot="off" >off</div>
 </vue-music-player-button>
+
+<div @click="volume+=0.1">add</div>{{volume}}<div @click="volume-=0.1">reduce</div>
 <script src="dist/vue.min.js"></script>
 <script src="dist/smart.min.js"></script>
 <script src="dist/wechat-share.js"></script>
@@ -40,7 +42,7 @@
            VueMusicPlayerButton: VueMusicPlayerButton
         },
         data: {
-
+            volume:1
         },
         methods: {
             updateState:function (playing) {

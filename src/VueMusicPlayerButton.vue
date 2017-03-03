@@ -29,6 +29,10 @@
     export default {
         // 声明 props
         props: {
+            volume: {
+                type: Number,
+                default: 1
+            },
             autoPlay: {
                 type: Boolean,
                 default: false
@@ -48,10 +52,12 @@
                 autoPlayTouchTime: 0
             }
         },
-        watch:{
-          playing:function (nv,ov) {
-              this.$emit('update-state', this.playing);
-          }
+        watch: {
+            playing: function (nv, ov) {
+                this.$emit('update-state', this.playing);
+            }, volume: function (nv, ov) {
+                this.music.audio.volume = Math.max(0,Math.min(nv,1)).toFixed(2);
+            }
 
         },
 
@@ -63,8 +69,8 @@
                 if (this.playing) {
                     if (this.autoPlayTouchTime <= new Date().getTime() - 800) {
                         this.music.pause();
-                    }else{
-                        this.autoPlayTouchTime=0
+                    } else {
+                        this.autoPlayTouchTime = 0
                     }
                 } else {
                     this.music.play();
@@ -85,12 +91,13 @@
                                 me.syncState();
                                 rm()
                             }
+
                             var rm = Event.windowEvent('touchstart', touchPlay);
 
 
                         }
                     })
-                }else{
+                } else {
                     me.music.play();
                     me.syncState();
                 }
@@ -99,8 +106,8 @@
         computed: {},
         ready: function () {
 
-            if(typeof(WechatShare)!="undefined" || window.WechatShare){
-                WechatShareClass=WechatShare || window.WechatShare;
+            if (typeof(WechatShare) != "undefined" || window.WechatShare) {
+                WechatShareClass = WechatShare || window.WechatShare;
             }
             this.music = new Sound({path: this.src, loop: this.loop});
             if (WechatShareClass) {
